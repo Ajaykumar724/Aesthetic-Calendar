@@ -1,0 +1,515 @@
+:root {
+  --bg: #eef2ff;
+  --card: #ffffffcc;
+  --accent: #6366f1;      /* Indigo */
+  --accent-2: #8b5cf6;    /* Purple */
+  --accent-rgba: 99,102,241;
+  --muted: #9aa3b2;
+  --text: #111827;
+}
+
+* {
+  box-sizing: border-box
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  /* background: linear-gradient(180deg, #f3f5fb 0%, #fafbff 100%); */
+}
+
+body {
+  margin: 0;
+  font-family: var(--theme-font, Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, 'Helvetica Neue', Arial);
+  color: var(--text);
+  /* background: linear-gradient(180deg, #f3f5fb 0%, #fafbff 100%); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px
+}
+
+.app-root {
+  width: 100%;
+  max-width: 980px
+}
+
+.calendar-shell {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+/* .calendar-card {
+  background: var(--card);
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(30, 40, 80, 0.08);
+  overflow: hidden
+} */
+
+.calendar-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 0px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+/* 
+  New css
+*/
+
+.hero-image {
+  position: relative;
+  height: 240px;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+}
+
+.month-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: white;
+}
+
+.month-title .year {
+  color: #e0e7ff;
+}
+
+/* End of new css */
+
+.hero {
+  display: flex;
+  flex-direction: column
+}
+
+.hero-image {
+  height: 220px;
+  background-size: cover;
+  background-position: center
+}
+
+.hero-meta {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  align-items: flex-start
+}
+
+.month-title {
+  font-weight: 800;
+  font-size: 26px;
+  color: var(--accent)
+}
+
+.month-title .year {
+  font-weight: 500;
+  color: #567
+}
+
+.notes-mini {
+  flex: 1
+}
+
+.notes-mini label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 6px
+}
+
+.notes-mini textarea {
+  width: 100%;
+  height: 64px;
+  border: 1px solid #eceff5;
+  border-radius: 0px;
+  padding: 8px;
+  resize: none
+}
+
+.btn {
+  background: transparent;
+  /* background: var(--accent); */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 0px;
+  cursor: pointer
+}
+
+/* .btn:hover {
+  background: var(--accent-2);
+  color: white;
+  border: 1px solid white;
+  border: none;
+}
+
+.ghost:hover {
+  background: transparent;
+  border: 1px solid #e6eaf5;
+  color: var(--text)
+} */
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid #e6eaf5;
+  color: var(--text)
+}
+
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-top: 1px solid #f1f3f8;
+  z-index: 100;
+}
+
+.month-label {
+  font-weight: 600
+}
+
+/* Improve visibility of ghost buttons when controls sit over the hero image */
+.hero + .controls .btn.ghost,
+.calendar-card .hero-image + .controls .btn.ghost {
+  color: white;
+  border-color: rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.06);
+}
+
+/* Ensure ghost buttons are still readable on light backgrounds */
+.controls .btn.ghost {
+  color: var(--text);
+  border-color: rgba(0,0,0,0.06);
+  background: transparent;
+}
+
+/* Make control buttons slightly bigger and consistent */
+.controls .btn {
+  min-width: 44px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spacer {
+  flex: 1
+}
+
+.grid-wrap {
+  padding: 16px
+}
+
+.weeknames {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+  color: #6b7280;
+  font-size: 12px
+}
+
+.grid {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  gap: 6px
+}
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px
+}
+
+.day {
+  background: transparent;
+  border-radius: 0px;
+  padding: 10px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  cursor: pointer
+}
+
+.day .date-num {
+  font-size: 14px
+}
+
+/* Ensure date numbers are visible on light backgrounds; override for special states */
+.day .date-num {
+  color: var(--date-color, #222);
+}
+.day.start .date-num,
+.day.end .date-num {
+  color: white;
+}
+.day.inrange .date-num {
+  color: var(--text);
+}
+.day.muted .date-num {
+  color: #b0b6bf;
+}
+
+.day.holiday .date-num {
+  font-weight: 700;
+}
+.holiday-badge {
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  background: #e55656;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.day.muted {
+  opacity: 0.35
+}
+
+.day.weekend {
+  color: #0b61ff33
+}
+
+.day.start {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: white
+}
+
+.day.end {
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  color: white
+}
+
+.day.inrange {
+  background: rgba(var(--accent-rgba), 0.12);
+  border-radius: 0px
+}
+
+/* smooth color and background transitions when theme updates */
+.calendar-card,
+.month-title,
+.btn,
+.day {
+  transition: background-color 320ms ease, color 320ms ease, border-color 320ms ease;
+}
+
+.range-note {
+  padding: 16px;
+  border-top: 1px solid #f1f3f8
+}
+
+.range-note textarea {
+  width: 100%;
+  height: 80px;
+  padding: 8px;
+  border-radius: 0px;
+  border: 1px solid #eceff5
+}
+
+.range-note .actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px
+}
+
+.range-note .hint {
+  color: #6b7280;
+  font-size: 13px
+}
+
+/* Desktop: image left, content right */
+@media(min-width:900px) {
+  .calendar-card {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    align-items: stretch
+  }
+
+  .calendar-card.flipped {
+    grid-template-columns: 1fr 420px;
+  }
+
+  .hero {
+    height: 100%;
+    width: 100vw;
+  }
+
+  .hero-image {
+    height: 100%;
+    min-height: 360px
+  }
+
+  .hero-meta {
+    flex-direction: column;
+    padding: 20px
+  }
+
+  .grid-wrap {
+    padding: 20px
+  }
+}
+
+/* Mobile tweaks */
+@media(max-width:600px) {
+  .hero-image {
+    height: 160px
+  }
+
+  .notes-mini textarea {
+    height: 56px
+  }
+
+  .controls {
+    padding: 8px
+  }
+
+  .month-label {
+    color: black !important;
+  }
+
+  .btn.ghost {
+    color: rgb(0, 0, 0) !important;
+    border-color: rgba(0, 0, 0, 0.45) !important;
+    background: rgba(255,255,255,0.06) !important;
+  
+  }
+}
+
+@media(min-width:600px) and (max-width:900px) {
+  .month-label {
+    color: black !important;
+  }
+
+  .btn.ghost {
+    color: rgb(0, 0, 0) !important;
+    border-color: rgba(0, 0, 0, 0.45) !important;
+    background: rgba(255,255,255,0.06) !important;
+  
+  }
+}
+
+
+
+
+
+/* Additional */
+
+.btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 0px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--accent-rgba), 0.3);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  color: var(--text);
+}
+
+.btn.ghost:hover {
+  background: #f3f4f6;
+}
+
+.day {
+  border-radius: 0px;
+  padding: 12px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.day:hover {
+  background: rgba(var(--accent-rgba), 0.08);
+  transform: scale(1.05);
+}
+
+.day .date-num {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.day.start,
+.day.end {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  box-shadow: 0 6px 18px rgba(var(--accent-rgba), 0.35);
+}
+
+.day.inrange {
+  background: rgba(var(--accent-rgba), 0.15);
+  border-radius: 0px;
+}
+
+.day.weekend {
+  color: #ef4444;
+}
+
+textarea {
+  transition: all 0.2s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgba), 0.15);
+}
+
+.controls {
+  padding: 14px 18px;
+}
+
+.grid-wrap {
+  padding: 18px;
+}
+
+.weeknames {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+* {
+  transition: background-color 0.25s ease, 
+              color 0.25s ease, 
+              transform 0.2s ease;
+}
+
+.day.today {
+  border: 2px solid var(--accent);
+}
+
+.calendar-card {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
