@@ -1,3 +1,4 @@
+🔗 Live Demo: [Aesthetic Calendar](https://aesthetic-calendar.netlify.app/)
 # Aesthetic Calendar (Vite + React)
 
 A small interactive calendar component inspired by a wall calendar design. Built with React + Vite.
